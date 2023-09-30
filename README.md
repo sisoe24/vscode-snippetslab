@@ -4,7 +4,7 @@ Unofficial SnippetsLab integration for VS Code.
 
 ## Description
 
-Use SnippetsLab snippets in VS Code and parameterize them with the vscode [snippet syntax](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax).
+Access your SnippetsLab snippets directly in VSCode and enjoy full compatibility with native VSCode [snippet syntax](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax).
 
 ## Requirements
 
