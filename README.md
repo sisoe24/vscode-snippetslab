@@ -13,48 +13,48 @@ This extension allows you to use your SnippetsLab snippets in VS Code. You can p
 
 ## Usage
 
-Simply open the command palette and run the `SnippetsLab: Insert Snippet` command.
+Simply open the command palette and run the `SnippetsLab: Show All Snippets` or `SnippetsLab: Show Language Snippets` command for language specific snippets.
 
-TODO: Add gif
+[Alt text](images/example.gif)
 
 ## Ignore Snippets
 
 You can ignore snippets by adding the `vscode-ignore` tag to the snippet in SnippetsLab.
 
-TODO: Add pic
-
 ## Available Commands
 
-| Command Name                  | Command ID                  | Description                       |
-| ----------------------------- | --------------------------- | --------------------------------- |
-| `SnippetsLab: Insert Snippet` | `snippetslab.insertSnippet` | Insert a snippet from SnippetsLab |
+| Command Name           | Command ID                         | Description                            |
+| ---------------------- | ---------------------------------- | -------------------------------------- |
+| Show All Snippets      | `snippetslab.showAllSnippets`      | Show all snippets                      |
+| Show Language Snippets | `snippetslab.showLanguageSnippets` | Show snippets for the current language |
 
 - By default, the extension does not provide any shortcut. But you can assign each command to one. (see [Key Bindings for Visual Studio Code](https://code.visualstudio.com/docs/getstarted/keybindings) for more information).
 
 Example `keybindings.json` :
 
 ```json
-{
-    "key": "alt+shift+s",
-    "command": "snippetslab.insertSnippet"
-}
+[
+    {
+        "key": "alt+shift+s",
+        "command": "snippetslab.showAllSnippets"
+    },
+    {
+        "key": "ctrl+alt+s",
+        "command": "snippetslab.showLanguageSnippets"
+    },
+]
 ```
 
 ## Configuration
 
 - `snippetslab.backupFolder`: Path to your SnippetsLab backup library. Default: `~/Library/Containers/com.renfei.snippets-lab/Data/Library/Application Support/SnippetsLab`
 
-- `snippetslab.searchSnippetsByTags`: Search snippets by tags. Default: `true`
+- `snippetslab.searchSnippetsByDescription`: Search snippets by description. Default: `true`
 
-- `snippetslab.searchSnippetsByNotes`: Search snippets by notes. Default: `true`
+- `snippetslab.searchSnippetsByDetails`: Search snippets by details. Default: `true`
 
 - `snippetslab.copySnippetToClipboard`: Copy snippet to clipboard. Default: `false`
 
 ## Notes
 
-The extensions uses the latest backup of your SnippetsLab library. Keep this in mind if you are not seeing your latest snippets. It might be because you have not backed up your library recently.
-
-## TODO
-
-- [ ] Add support for multiple snippet fragments
-- [ ] Filter snippets by language
+The extensions uses the latest backup of your SnippetsLab library. Keep this in mind if you are not seeing your latest snippets. It might be because you have not backed up your library recently. You also need to restart VS Code after backing up your library.
