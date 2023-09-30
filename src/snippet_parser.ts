@@ -3,17 +3,17 @@ import * as vscode from "vscode";
 import { homedir } from "os";
 import { getConfig } from "./config";
 
+export type SnippetFragment = {
+    content: string;
+    note: string;
+    language: string;
+    title: string;
+};
+
 export type SnippetItem = {
     title: string;
     tags: string[];
-    fragments: [
-        {
-            content: string;
-            note: string;
-            language: string;
-            title: string;
-        }
-    ];
+    fragments: SnippetFragment[];
 };
 
 export type TagItem = {
@@ -108,10 +108,10 @@ export function convertTags(snippetTags: string[], tagsMap: Map<string, string>)
         return "";
     }
     const tagTitles = snippetTags.map((tag) => {
-        return tagsMap.get(tag);
+        return `#${tagsMap.get(tag)}`;
     });
 
-    return `Tags: ${tagTitles.join(", ")}`;
+    return tagTitles.join(", ");
 }
 
 /**
