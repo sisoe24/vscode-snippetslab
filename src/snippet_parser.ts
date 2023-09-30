@@ -9,8 +9,9 @@ export type SnippetItem = {
     fragments: [
         {
             content: string;
-            notes: string;
+            note: string;
             language: string;
+            title: string;
         }
     ];
 };
@@ -27,25 +28,22 @@ type Library = {
     };
 };
 
-class SnippetQuickItem implements vscode.QuickPickItem {
+export class SnippetQuickItem implements vscode.QuickPickItem {
     label: string;
     content: string;
-    language?: string | undefined;
     detail?: string | undefined;
     description?: string | undefined;
 
     constructor(
         label: string,
         content: string,
-        description: string | undefined,
         detail?: string | undefined,
-        language?: string | undefined
+        description?: string | undefined
     ) {
         this.label = label;
         this.content = content;
-        this.description = description;
         this.detail = detail;
-        this.language = language;
+        this.description = description;
     }
 }
 
@@ -58,7 +56,6 @@ class SnippetQuickItem implements vscode.QuickPickItem {
  */
 export function getLibrary(path: string): Library {
     const backupPath = path.replace("~", homedir());
-    console.log(backupPath);
 
     let lastDir = "";
     let lastMod = 0;
@@ -84,7 +81,7 @@ export function getLibrary(path: string): Library {
 /**
  * Extract the tags from the library and map them to the tag UUID.
  *
- * @param {Library} tags The content of the SnippetsLab library.
+ * @param {TagItem[]} tags The content of the SnippetsLab library.
  * @returns {Map<string, string>} The tags from the SnippetsLab library.
  */
 export function mapTags(tags: TagItem[]): Map<string, string> {
@@ -114,7 +111,7 @@ export function convertTags(snippetTags: string[], tagsMap: Map<string, string>)
         return tagsMap.get(tag);
     });
 
-    return `(${tagTitles.join(", ")})`;
+    return `Tags: ${tagTitles.join(", ")}`;
 }
 
 /**
@@ -124,15 +121,15 @@ export function convertTags(snippetTags: string[], tagsMap: Map<string, string>)
  *
  * TODO: Allow multiple fragments.
  *
- * @param {SnippetItem[]} snippets An array of SnippetItem.
+ * @param {Map<string, SnippetItem[]>} snippets array of SnippetItem.
  * @param {Map<string, string>} tagsMap The mapped tags (UUID -> Tag name).
  * @returns {SnippetQuickItem[]} An array of SnippetQuickItem ready to be used in the QuickPick.
  */
 export function snippetQuickItemBuilder(
     snippets: SnippetItem[],
     tagsMap: Map<string, string>
-): SnippetQuickItem[] {
-    const snippetQuickItems: SnippetQuickItem[] = [];
+): Map<string, SnippetQuickItem[]> {
+    const snippetQuickItems: Map<string, SnippetQuickItem[]> = new Map();
 
     for (const snippet of snippets) {
         const tags = convertTags(snippet["tags"], tagsMap);
@@ -141,25 +138,39 @@ export function snippetQuickItemBuilder(
             continue;
         }
 
-        snippetQuickItems.push(
-            new SnippetQuickItem(
+        for (const fragment of snippet["fragments"]) {
+
+            let description = `${tags} - ${fragment["title"]}`.trimStart();
+            if (description === "- Fragment") {
+                description = "";
+            }
+
+            const snippetQuickItem = new SnippetQuickItem(
                 snippet["title"],
-                snippet["fragments"][0]["content"],
-                tags,
-                snippet["fragments"][0]["notes"],
-                snippet["fragments"][0]["language"]
-            )
-        );
+                fragment["content"],
+                fragment["note"],
+                description
+            );
+
+            const language = fragment["language"].toLowerCase().replace("lexer", "");
+
+            if (snippetQuickItems.has(language)) {
+                snippetQuickItems.get(language)?.push(snippetQuickItem);
+            } else {
+                snippetQuickItems.set(language, [snippetQuickItem]);
+            }
+        }
     }
+
     return snippetQuickItems;
 }
 
 /**
  * Main entry point for the parser.
  *
- * @returns {SnippetQuickItem[]} An array of SnippetQuickItem ready to be used in the QuickPick.
+ * @returns {Map<string, SnippetQuickItem[]>} An array of SnippetQuickItem ready to be used in the QuickPick.
  */
-export function parseSnippets(): SnippetQuickItem[] {
+export function parseSnippets(): Map<string, SnippetQuickItem[]> {
     const lib = getLibrary(getConfig("backupFolder"));
     if (!lib) {
         throw Error("No library found");
