@@ -4,7 +4,7 @@ Unofficial SnippetsLab integration for VS Code.
 
 ## Description
 
-This extension allows you to use your SnippetsLab snippets in VS Code. You can parameterize your snippets and use them in VS Code by using the vscode [snippet syntax](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax).
+Use SnippetsLab snippets in VS Code and parameterize them with the vscode [snippet syntax](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax).
 
 ## Requirements
 
@@ -15,7 +15,7 @@ This extension allows you to use your SnippetsLab snippets in VS Code. You can p
 
 Simply open the command palette and run the `SnippetsLab: Show All Snippets` or `SnippetsLab: Show Language Snippets` command for language specific snippets.
 
-[Alt text](images/example.gif)
+[demo](#demo)
 
 ## Ignore Snippets
 
@@ -57,4 +57,8 @@ Example `keybindings.json` :
 
 ## Notes
 
-The extensions uses the latest backup of your SnippetsLab library. Keep this in mind if you are not seeing your latest snippets. It might be because you have not backed up your library recently. You also need to restart VS Code after backing up your library.
+The extension uses the latest backup of your SnippetsLab library. If you don't see your latest snippets, please back up your library and restart VS Code.
+
+## Demo
+
+![Alt text](images/example.gif)
