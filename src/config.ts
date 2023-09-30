@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
 
 type BooleanConfigProperties =
-    | "searchSnippetsByNotes"
-    | "searchSnippetsByTags"
+    | "searchSnippetsByDescription"
+    | "searchSnippetsByDetails"
     | "filterByLanguage"
     | "showSnippets"
     | "copySnippetToClipboard";

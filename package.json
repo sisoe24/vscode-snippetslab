@@ -26,8 +26,13 @@
   "contributes": {
     "commands": [
       {
-        "command": "snippetslab.showSnippets",
-        "title": "Show Snippets",
+        "command": "snippetslab.showAllSnippets",
+        "title": "Show All Snippets",
+        "category": "SnippetsLab"
+      },
+      {
+        "command": "snippetslab.showLanguageSnippets",
+        "title": "Show Language Snippets",
         "category": "SnippetsLab"
       }
     ],
@@ -39,15 +44,15 @@
           "default": "~/Library/Containers/com.renfei.SnippetsLab/Data/Library/Application Support/Backups",
           "description": "Path to SnippetsLab backup folder"
         },
-        "snippetsLab.searchSnippetsByTags": {
+        "snippetsLab.searchSnippetsByDescription": {
           "type": "boolean",
           "default": true,
-          "description": "Search snippets by tags"
+          "description": "Search snippets description"
         },
-        "snippetsLab.searchSnippetsByNotes": {
+        "snippetsLab.searchSnippetsByDetails": {
           "type": "boolean",
           "default": true,
-          "description": "Search snippets by notes"
+          "description": "Search snippets by details"
         },
         "snippetsLab.copySnippetToClipboard": {
           "type": "boolean",
