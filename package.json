@@ -2,7 +2,7 @@
   "name": "snippetslab",
   "publisher": "virgilsisoe",
   "displayName": "SnippetsLab",
-  "description": "Unofficial SnippetsLab vscode integration",
+  "description": "SnippetsLab vscode integration",
   "version": "0.0.1",
   "repository": {
     "type": "git",
