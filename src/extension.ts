@@ -28,7 +28,16 @@ function showQuickPick(snippets: SnippetQuickItem[], mode: string = "all") {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    const snippetsMap = parseSnippets();
+    
+    let snippetsMap: Map<string, SnippetQuickItem[]>; 
+
+    try {
+        snippetsMap = parseSnippets();
+    } catch (error) {
+        vscode.window.showErrorMessage(error.message);
+        return;
+    }
+
     const allSnippets = [...snippetsMap.values()].flat();
 
     context.subscriptions.push(
