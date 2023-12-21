@@ -63,3 +63,6 @@ The extension uses the latest backup of your SnippetsLab library. If you don't s
 ## Demo
 
 ![Alt text](images/example.gif)
+
+On Windows:
+![windows](images/examle_win.jpg)
