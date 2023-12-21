@@ -34,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     try {
         snippetsMap = parseSnippets();
     } catch (error) {
-        vscode.window.showErrorMessage(error.message);
+        vscode.window.showErrorMessage((error as Error).message);
         return;
     }
 
