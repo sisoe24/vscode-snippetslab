@@ -60,6 +60,10 @@ export function getLibrary(path: string): Library {
     let lastDir = "";
     let lastMod = 0;
 
+    if (!fs.existsSync(backupPath)) {
+        throw Error("Backup folder not found: " + backupPath);
+    }
+
     for (const file of fs.readdirSync(backupPath)) {
         if (
             file.endsWith("snippetslab-backup") &&
@@ -172,8 +176,5 @@ export function snippetQuickItemBuilder(
  */
 export function parseSnippets(): Map<string, SnippetQuickItem[]> {
     const lib = getLibrary(getConfig("backupFolder"));
-    if (!lib) {
-        throw Error("No library found");
-    }
     return snippetQuickItemBuilder(lib["contents"]["snippets"], mapTags(lib["contents"]["tags"]));
 }
