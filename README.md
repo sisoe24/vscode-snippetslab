@@ -8,8 +8,9 @@ Access your SnippetsLab snippets directly in VSCode and enjoy full compatibility
 
 ## Requirements
 
-- [SnippetsLab](https://www.renfei.org/snippets-lab/) (MacOS only)
-- The extensions needs the path of your SnippetsLab backup folder. By default, it is `~/Library/Containers/com.renfei.snippets-lab/Data/Library/Application Support/SnippetsLab`. You can change it in the extension settings.
+- The extensions needs the path of your SnippetsLab backup folder. By default, it is `~/Library/Containers/com.renfei.SnippetsLab/Data/Library/Application Support/Backups`. You can change it in the extension settings.
+
+> Technically, SnippetsLab is a macOS app, but nothing prevents you from using the extension on Windows or Linux. You just need to share your SnippetsLab library with another device (cloud drive, git, etc.), and then configure the extension to use the new path.
 
 ## Usage
 
@@ -47,7 +48,7 @@ Example `keybindings.json` :
 
 ## Configuration
 
-- `snippetslab.backupFolder`: Path to your SnippetsLab backup library. Default: `~/Library/Containers/com.renfei.snippets-lab/Data/Library/Application Support/SnippetsLab`
+- `snippetslab.backupFolder`: Path to your SnippetsLab backup library. Default: `~/Library/Containers/com.renfei.SnippetsLab/Data/Library/Application Support/Backups`
 
 - `snippetslab.searchSnippetsByDescription`: Search snippets by description. Default: `true`
 
